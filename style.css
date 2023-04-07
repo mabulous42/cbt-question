@@ -15,6 +15,7 @@
 
 .small-container{
     background-color: white;
+    height: 80vh;
     width: 90vw;
     justify-content: space-between;   
 }
