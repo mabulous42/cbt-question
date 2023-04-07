@@ -1,6 +1,7 @@
 let showQuestions = document.getElementById("show-questions");
 let showOptions = document.getElementById("show-options");
 let showResults = document.getElementById("show-result");
+let prevBtn = document.getElementById("prev-btn");
 
 let arrayCbt = [
     {
@@ -29,15 +30,50 @@ let arrayCbt = [
         answers: "Strength"
     }
 ];
-
-function next() {
-    
+let count = 0;
+// if (count === 0) {
+// } else {
+//     prevBtn.disabled = false;    
+// }
+function SortQuestions() {
+    arrayCbt.forEach((cbt, index) => {
+        if (index == count) {
+            showQuestions.innerHTML = `
+            <h1>${index+1+"."} ${cbt.question}</h1>            
+            `              
+        }
+        cbt.options.map((pick, index2) => {
+            if (index == count) {                
+            console.log(pick);            
+            showOptions.innerHTML += `
+            <h5>
+            <input name="answer" type="radio">
+            <label for="answer">${pick}</label><br>
+            </h5>
+            `
+            }
+            
+        })    
+        
+    })
 }
 
-arrayCbt.map((cbt, index) => {
-    console.log(cbt);
-        showQuestions.innerHTML = `        
-            <h1>${index+1+"."} ${cbt.question}</h1>
-            <h5>${cbt.options}</h5>        
-        `
-})
+SortQuestions();
+
+function nextQuestion() {
+    count++;
+    SortQuestions();
+}
+
+function previousQuestion() {
+    count--;
+    SortQuestions();
+}
+
+
+
+
+       
+                        
+                   
+        
