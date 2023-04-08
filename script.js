@@ -31,18 +31,15 @@ let arrayCbt = [
     }
 ];
 let count = 0;
-// if (count === 0) {
-// } else {
-//     prevBtn.disabled = false;    
-// }
 function SortQuestions() {
     arrayCbt.forEach((cbt, index) => {
-        if (index == count) {
+        if (index == count && count < arrayCbt.length) {
+            index = count;
             showQuestions.innerHTML = `
             <h1>${index+1+"."} ${cbt.question}</h1>            
             `              
         }
-        cbt.options.map((pick, index2) => {
+        cbt.options.map((pick) => {
             if (index == count) {                
             console.log(pick);            
             showOptions.innerHTML += `
@@ -61,11 +58,20 @@ function SortQuestions() {
 SortQuestions();
 
 function nextQuestion() {
+    showOptions.innerHTML = "";
     count++;
     SortQuestions();
+    // if (count === arrayCbt.length-2) {
+    //     count = arrayCbt.length-2;
+    //     SortQuestions();
+    // } else {
+    //     SortQuestions();
+    // }
+    
 }
 
 function previousQuestion() {
+    showOptions.innerHTML = "";
     count--;
     SortQuestions();
 }
