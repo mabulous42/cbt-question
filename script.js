@@ -33,41 +33,52 @@ let arrayCbt = [
 let count = 0;
 function SortQuestions() {
     arrayCbt.forEach((cbt, index) => {
-        if (index == count && count < arrayCbt.length) {
+        if (index == count && index < arrayCbt.length) {
             index = count;
+            showQuestions.innerHTML = "";
             showQuestions.innerHTML = `
-            <h1>${index+1+"."} ${cbt.question}</h1>            
-            `              
-        }
-        cbt.options.map((pick) => {
-            if (index == count) {                
-            console.log(pick);            
-            showOptions.innerHTML += `
-            <h5>
-            <input name="answer" type="radio">
-            <label for="answer">${pick}</label><br>
-            </h5>
+            <h1>${index + 1 + "."} ${cbt.question}</h1>            
             `
-            }
-            
-        })    
+            cbt.options.map((pick) => {
+                if (index == count) {
+                    index = count;
+                    console.log(pick);
+                    // showOptions.innerHTML = "";
+    
+                    showOptions.innerHTML += `
+                <h5>
+                <input name="answer" type="radio">
+                <label for="answer">${pick}</label><br>
+                </h5>
+                `
+                }
+    
+            })
+        }
         
+
     })
+   
 }
 
 SortQuestions();
 
 function nextQuestion() {
     showOptions.innerHTML = "";
+    // showQuestions.innerHTML = "";
+    if (count == arrayCbt.length - 1) {
+        return;
+    }
     count++;
     SortQuestions();
+    console.log(count);
     // if (count === arrayCbt.length-2) {
     //     count = arrayCbt.length-2;
     //     SortQuestions();
     // } else {
     //     SortQuestions();
     // }
-    
+
 }
 
 function previousQuestion() {
@@ -79,7 +90,6 @@ function previousQuestion() {
 
 
 
-       
-                        
-                   
-        
+
+
+
