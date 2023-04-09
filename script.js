@@ -62,7 +62,8 @@ function SortQuestions() {
             nextBtn.style.display = 'none';
             submitBtn.style.display = 'block';            
         } else {
-            nextBtn.style.visibility = 'visible';
+            nextBtn.style.display = 'block';
+            submitBtn.style.display = 'none';            
         }
 
 
