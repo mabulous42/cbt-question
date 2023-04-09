@@ -2,6 +2,10 @@ let showQuestions = document.getElementById("show-questions");
 let showOptions = document.getElementById("show-options");
 let showResults = document.getElementById("show-result");
 let prevBtn = document.getElementById("prev-btn");
+let nextBtn = document.getElementById('next-btn');
+let submitBtn = document.getElementById('submit-btn');
+
+submitBtn.style.display = 'none';
 
 let arrayCbt = [
     {
@@ -31,54 +35,45 @@ let arrayCbt = [
     }
 ];
 let count = 0;
-function SortQuestions() {
-    arrayCbt.forEach((cbt, index) => {
-        if (index == count && index < arrayCbt.length) {
-            index = count;
-            showQuestions.innerHTML = "";
-            showQuestions.innerHTML = `
-            <h1>${index + 1 + "."} ${cbt.question}</h1>            
-            `
-            cbt.options.map((pick) => {
-                if (index == count) {
-                    index = count;
-                    console.log(pick);
-                    // showOptions.innerHTML = "";
-    
-                    showOptions.innerHTML += `
-                <h5>
-                <input name="answer" type="radio">
-                <label for="answer">${pick}</label><br>
-                </h5>
-                `
-                }
-    
-            })
-        }
-        
+let track = 0;
 
-    })
-   
+function SortQuestions() {
+
+    showQuestions.innerHTML = `
+        <h1>${count + 1 + "."} ${arrayCbt[count].question}</h1>           
+        ` 
+        for (let index = 0; index < arrayCbt[count].options.length; index++) {
+            showOptions.innerHTML += `
+            <h5>
+            <input name="answer" type="radio">
+            <label for="answer">${arrayCbt[count].options[index]}</label>
+            </h5>
+            `
+            
+        } 
+        
+        if (count == 0) {
+            prevBtn.style.visibility = 'hidden';
+        } else {
+            prevBtn.style.visibility = 'visible';
+        }
+
+        if (count == arrayCbt.length-1) {
+            nextBtn.style.display = 'none';
+            submitBtn.style.display = 'block';            
+        } else {
+            nextBtn.style.visibility = 'visible';
+        }
+
+
 }
 
 SortQuestions();
 
 function nextQuestion() {
     showOptions.innerHTML = "";
-    // showQuestions.innerHTML = "";
-    if (count == arrayCbt.length - 1) {
-        return;
-    }
     count++;
     SortQuestions();
-    console.log(count);
-    // if (count === arrayCbt.length-2) {
-    //     count = arrayCbt.length-2;
-    //     SortQuestions();
-    // } else {
-    //     SortQuestions();
-    // }
-
 }
 
 function previousQuestion() {
